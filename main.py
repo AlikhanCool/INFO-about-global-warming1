@@ -3,7 +3,6 @@ from telebot import types
 import random
 from settings import TG_API_TOKEN
 
-
 bot = telebot.TeleBot(TG_API_TOKEN)
 
 INFO_LIST = [
@@ -26,7 +25,7 @@ def send_welcome(message):
     first_info = random.choice(INFO_LIST)
     bot.send_message(
         chat_id=message.chat.id,
-        text=f"Приветствуем. Вот информация о глобальном потеплении:\n\n{first_info}",
+        text=f"Привет, вот информация о глобальном потеплении:\n\n{first_info}",
         reply_markup=get_info_keyboard()
     )
 
@@ -42,7 +41,7 @@ def callback_inline(call):
         bot.edit_message_text(
             chat_id=call.message.chat.id,
             message_id=call.message.id,
-            text=f"Приветствуем. Вот информация о глобальном потеплении:\n\n{new_info}",
+            text=f"Привет, вот информация о глобальном потеплении:\n\n{new_info}",
             reply_markup=get_info_keyboard()
         )
     except Exception:
@@ -50,5 +49,4 @@ def callback_inline(call):
 
     bot.answer_callback_query(call.id)
 
-
-    bot.infinity_polling()
+bot.infinity_polling()
